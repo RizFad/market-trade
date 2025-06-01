@@ -289,16 +289,15 @@ function renderWidgets() {
       });
     }
 
-    const chunkSize = 40;
+    const chunkSize = 60;  // Ubah chunk jadi 60 data per tab
     for (let i = 0; i < symbols.length; i += chunkSize) {
       const chunk = symbols.slice(i, i + chunkSize);
-      // const fixedSymbols = chunk.map(sym => (!sym.includes(":") ? "BINANCE:" + sym : sym));
       const fixedSymbols = chunk.map(sym => {
-  if (sym.includes(":")) {
-    return sym.trim();
-  }
-  return `BINANCE:${sym.trim()}`;
-});
+        if (sym.includes(":")) {
+          return sym.trim();
+        }
+        return `BINANCE:${sym.trim()}`;
+      });
 
       const gridItems = chunk.map((_, idx) => `<div id="tvchart${idx}" class="tvchart"></div>`).join("");
 
@@ -336,7 +335,7 @@ function renderWidgets() {
             body { background: #181a20; margin: 0; }
             .grid {
               display: grid;
-              grid-template-columns: repeat(5, 1fr);
+              grid-template-columns: repeat(6, 1fr); /* 6 kolom */
               gap: 16px;
               padding: 16px;
             }
